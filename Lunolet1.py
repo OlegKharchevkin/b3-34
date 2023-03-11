@@ -1,9 +1,22 @@
 class Lunolet1():
+	r_default = [0,
+                 0,
+                 0,
+                 0,
+                 1.62,
+                 2250,
+                 3660,
+                 9.81 * 3,
+                 0,
+                 0,
+                 0,
+                 3600,
+                 400]
 	def __init__(self, output_ = print, input_ = input, r = ([0]*13), config_ = True):
 		self.output = output_
 		self.input = input_
 		self.r = r
-		if config_: __config()
+		if config_: self.__config()
 	def __f1(self, x, y):
 		self.r[1] = x
 		self.r[2] = y
@@ -16,22 +29,26 @@ class Lunolet1():
 		self.r[11] -= self.r[2] * self.r[0]
 		self.r[12] -= self.r[1]
 	def __config(self):
-		self.output("Для ввода значения по умолчанию введите 0")
-		self.output("Введите ускорение свододного падения (1.62 по умолчанию)")
-		self.r[4] = 1.62     if (i := float(self.input())) == 0 else i
-		self.output("Введите массу корабля без топлива (2250 по умолчанию)")
-		self.r[5] = 2250     if (i := float(self.input())) == 0 else i
-		self.output("Введите скорость продукнов сгорания  (3660 по умолчанию)")
-		self.r[6] = 3660     if (i := float(self.input())) == 0 else i
-		self.output("Введите предельное ускорение (29.43 по умолчанию)")
-		self.r[7] = 9.81 * 3 if (i := float(self.input())) == 0 else i
-		self.output("Введите режим таймера (1 - вкл., 0 - выкл.)")
-		if (i := float(self.input())) == 1:
-			self.output("Введите оставшееся время (3600 по умолчанию)")
-			self.r[11] = 3600    if (j := float(self.input())) == 0 else j
+		self.output("Для ввода значения по умолчанию введите d")
+		self.output(f"Введите ускорение свододного падения ({self.r_default[4]} по умолчанию)")
+		self.r[4] = self.r_default[4] if (i := self.input()) == 'd' else float(i)
+		self.output(f"Введите массу корабля без топлива ({self.r_default[5]} по умолчанию)")
+		self.r[5] = self.r_default[5] if (i := self.input()) == 'd' else float(i)
+		self.output(f"Введите скорость продукнов сгорания  ({self.r_default[6]} по умолчанию)")
+		self.r[6] = self.r_default[6] if (i := self.input()) == 'd' else float(i)
+		self.output(f"Введите предельное ускорение ({self.r_default[7]} по умолчанию)")
+		self.r[7] = self.r_default[7] if (i := self.input()) == 'd' else float(i)
+		self.output(f"Введите начальную высоту ({self.r_default[9]} по умолчанию)")
+		self.r[9] = self.r_default[9] if (i := self.input()) == 'd' else float(i)
+		self.output(f"Введите начальную скорость ({self.r_default[10]} по умолчанию)")
+		self.r[10] = self.r_default[10] if (i := self.input()) == 'd' else float(i)
+		self.output(f"Введите режим таймера (1 - вкл., 0 - выкл.)")
+		if (i := float(self.input().replace('d', '0'))) == 1:
+			self.output(f"Введите оставшееся время ({self.r_default[11]} по умолчанию)")
+			self.r[11] = self.r_default[11] if (j := self.input()) == 'd' else float(j)
 		self.r[0] = i
-		self.output("Введите запас топлива (400 по умолчанию)")
-		self.r[12] = 400     if (i := float(self.input())) == 0 else i
+		self.output(f"Введите запас топлива ({self.r_default[12]} по умолчанию)")
+		self.r[12] = self.r_default[12] if (i := self.input()) == 'd' else float(i)
 	def __call__(self):
 		while True:
 			self.output(f"Скорость:      {self.r[10]}")
