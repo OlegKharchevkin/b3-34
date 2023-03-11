@@ -1,17 +1,17 @@
 class Lunolet1():
-	r_default = [0,
-                 0,
-                 0,
-                 0,
-                 1.62,
-                 2250,
-                 3660,
-                 9.81 * 3,
-                 0,
-                 0,
-                 0,
-                 3600,
-                 400]
+	r_default = [0,       # 0  режим таймера
+                 0,       # 1  масса сжигаемого топлива
+                 0,       # 2  время манёвра
+                 0,       # 3  ускорение корабля
+                 1.62,    # 4  ускорение свободного падения
+                 2250,    # 5  масса корабля без топлива
+                 3660,    # 6  скорость вылета продукнов сгорания
+                 9.81 * 3,# 7  предельное ускорение
+                 0,       # 8  расход топлива
+                 0,       # 9  высота корабля
+                 0,       # 10 скорость корабля
+                 3600,    # 11 оставшееся время
+                 400]     # 12 запас топлива
 	def __init__(self, output_ = print, input_ = input, r = ([0]*13), config_ = True):
 		self.output = output_
 		self.input = input_
@@ -34,7 +34,7 @@ class Lunolet1():
 		self.r[4] = self.r_default[4] if (i := self.input()) == 'd' else float(i)
 		self.output(f"Введите массу корабля без топлива ({self.r_default[5]} по умолчанию)")
 		self.r[5] = self.r_default[5] if (i := self.input()) == 'd' else float(i)
-		self.output(f"Введите скорость продукнов сгорания  ({self.r_default[6]} по умолчанию)")
+		self.output(f"Введите скорость вылета продукнов сгорания  ({self.r_default[6]} по умолчанию)")
 		self.r[6] = self.r_default[6] if (i := self.input()) == 'd' else float(i)
 		self.output(f"Введите предельное ускорение ({self.r_default[7]} по умолчанию)")
 		self.r[7] = self.r_default[7] if (i := self.input()) == 'd' else float(i)
@@ -72,7 +72,7 @@ class Lunolet1():
 		self.r[10] +=(self.r[3] - self.r[4]) * self.r[2]
 		self.r[9] +=(rbtmp + self.r[10]) / 2 * self.r[2]
 		self.r[11] -= self.r[2] * self.r[0]
-		self.r[12] -= self.r[1]  
+		self.r[12] -= self.r[1]
 		while True:
 			if self.r[12] < 0:
 				self.__f1(self.r[12], self.r[12] / self.r[8])
