@@ -75,3 +75,6 @@ class Lunolet1():
 						self.__f1(0, self.r[6])
 			else:
 				break
+if __name__ == "__main__":
+    l1 = Lunolet1()
+    l1()
