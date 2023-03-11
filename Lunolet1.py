@@ -1,5 +1,5 @@
 class Lunolet1():
-	def __init__(self, output_ = print, input_ = input, r = ([0]*13), config_ = False):
+	def __init__(self, output_ = print, input_ = input, r = ([0]*13), config_ = True):
 		self.output = output_
 		self.input = input_
 		self.r = r
