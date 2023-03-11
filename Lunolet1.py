@@ -43,7 +43,7 @@ class Lunolet1():
 		self.output(f"Введите начальную скорость ({self.r_default[10]} по умолчанию)")
 		self.r[10] = self.r_default[10] if (i := self.input()) == 'd' else float(i)
 		self.output(f"Введите режим таймера (1 - вкл., 0 - выкл.)")
-		if (i := float(self.input().replace('d', '0'))) == 1:
+		if (i := float(self.input().replace('d', self.r_default[0]))) == 1:
 			self.output(f"Введите оставшееся время ({self.r_default[11]} по умолчанию)")
 			self.r[11] = self.r_default[11] if (j := self.input()) == 'd' else float(j)
 		self.r[0] = i
