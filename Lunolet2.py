@@ -33,8 +33,26 @@ class Lunolet2():
                 self.output("Время не может равняться нулю!")
             z = float(self.input())
             self.__step(x, y, z)
-    def __config():
-        pass
+    def __config(self):
+        self.output("Для ввода значения по умолчанию введите d")
+        self.output(f"Введите ускорение свододного падения ({self.r_default[4]} по умолчанию)")
+        self.r[4] = self.r_default[4] if (i := self.input()) == 'd' else float(i)
+        self.output(f"Введите массу корабля без топлива ({self.r_default[5]} по умолчанию)")
+        self.r[5] = self.r_default[5] if (i := self.input()) == 'd' else float(i)
+        self.output(f"Введите скорость продукнов сгорания  ({self.r_default[6]} по умолчанию)")
+        self.r[6] = self.r_default[6] if (i := self.input()) == 'd' else float(i)
+        self.output(f"Введите предельное ускорение ({self.r_default[7]} по умолчанию)")
+        self.r[7] = self.r_default[7] if (i := self.input()) == 'd' else float(i)
+        self.output(f"Введите начальную высоту ({self.r_default[9]} по умолчанию)")
+        self.r[9] = self.r_default[9] if (i := self.input()) == 'd' else float(i)
+        self.output(f"Введите начальную верт. скорость ({self.r_default[10]} по умолчанию)")
+        self.r[10] = self.r_default[10] if (i := self.input()) == 'd' else float(i)
+        self.output(f"Введите растояние до цели ({self.r_default[11]} по умолчанию)")
+        self.r[11] = self.r_default[11] if (i := self.input()) == 'd' else float(i)
+        self.output(f"Введите начальную гор. скорость ({self.r_default[0]} по умолчанию)")
+        self.r[0] = self.r_default[0] if (i := self.input()) == 'd' else float(i)
+        self.output(f"Введите запас топлива ({self.r_default[12]} по умолчанию)")
+        self.r[12] = self.r_default[12] if (i := self.input()) == 'd' else float(i)
     def __step(self, x, y, z):
         self.r[1] = z
         self.r[2] = y
