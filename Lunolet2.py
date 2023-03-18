@@ -1,3 +1,4 @@
+import math
 class Lunolet2():
     r_default = [0,       # 0  режим таймера
                  0,       # 1  масса сжигаемого топлива
@@ -18,30 +19,41 @@ class Lunolet2():
         pass
     def __config():
         pass
-    def __step():
+    def __step(self, x, y, z):
+        r1 = z
+        r2 = y
+        r8 = x / r2
+        r3 = (r8 * r6) / (rd + r5)
         while True:
-            #f2
-            #f1
-            #f2
-            if 1 >= 0:
-                break
-            else:
-                pass
-        if 1 < 0:
-            #f1
-            pass
-        else:
-            if 1 != 0:
-                if 1 < 0:
-                    if 1 != 0:
-                        pass #ошибка двигателя
+            while True:
+                r0tmp = r0
+                r0 += math.sin(r1) * r3 * r2
+                rc -= ((r0tmp + r0) * 2) / 2
+                rbtmp = rb
+                rb -= (r4 - r3 * math.cos(r1)) * r2
+                ra += ((rbtmp+rb) * 2) / 2
+                rd -= r8 * r2
+                if rd >=0:
+                    break
+                r2 = rd / r8
+            if ra < 0:
+                r2 = (2 * ra) / ((2 * ra * (r4 - r3 * math.cos(r1)))**0.5 - rb)
+            elif ra != 0:
+                if r3 < r7:
+                    if rd == 0:
+                        self.output("Нехватка топлива!")
+                        r2 = r6
+                        r8 = 0
+                        r3 = 0
                     else:
                         break #ввод/вывод
                 else:
-                    pass #ошибка двигателя
+                    self.output("Перегрузки!")
+                    r2 = r3 - r7
+                    r8 = rd / r2
+                    r3 = (r8 * r6) / (rd + r5)
             else:
                 break #ввод/вывод
-            #something
             
 if __name__ == "__main__":
     l2 = Lunolet2()
