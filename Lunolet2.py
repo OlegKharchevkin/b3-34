@@ -24,9 +24,8 @@ class Lunolet2():
             self.output(f"Высота:         {self.r[9]}")
             self.output(f"Гор. скорость:  {self.r[0]}")
             self.output(f"Растояние:      {self.r[11]}")
-            self.output(f"Запас топлива:  {self.r[11]}")
+            self.output(f"Запас топлива:  {self.r[12]}")
             self.output(f"Ускорение:      {self.r[3]}")
-            self.output(f"Время:          {self.r[12]}")
             while (x := float(self.input())) >= self.r[5] * 0.05:
                 self.output("Слишком большой расход!")
             while (y := float(self.input())) == 0:
@@ -53,7 +52,7 @@ class Lunolet2():
         self.r[0] = self.r_default[0] if (i := self.input()) == 'd' else float(i)
         self.output(f"Введите запас топлива ({self.r_default[12]} по умолчанию)")
         self.r[12] = self.r_default[12] if (i := self.input()) == 'd' else float(i)
-    def __step(self, x, y, z):
+    def step(self, x, y, z):
         self.r[1] = z
         self.r[2] = y
         self.r[8] = x / self.r[2]

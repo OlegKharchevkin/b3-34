@@ -53,15 +53,15 @@ class Lunolet1():
 		while True:
 			self.output(f"Скорость:      {self.r[10]}")
 			self.output(f"Высота:        {self.r[9]}")
-			self.output(f"Запас топлива: {self.r[11]}")
+			self.output(f"Запас топлива: {self.r[12]}")
 			self.output(f"Ускорение:     {self.r[3]}")
-			self.output(f"Время:         {self.r[12]}")
+			self.output(f"Время:         {self.r[11]}")
 			while (x := float(self.input())) >= self.r[5] * 0.05:
 				self.output("Слишком большой расход!")
 			while (y := float(self.input())) == 0:
 				self.output("Время не может равняться нулю!")
 			self.__step(x, y)
-	def __step(self, x, y):
+	def step(self, x, y):
 		self.r[1] = x
 		r2tmp = y
 		self.r[2] = abs(r2tmp)
