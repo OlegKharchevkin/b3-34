@@ -60,7 +60,7 @@ class Lunolet1():
 				self.output("Слишком большой расход!")
 			while (y := float(self.input())) == 0:
 				self.output("Время не может равняться нулю!")
-			self.__step(x, y)
+			self.step(x, y)
 	def step(self, x, y):
 		self.r[1] = x
 		r2tmp = y

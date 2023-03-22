@@ -31,7 +31,7 @@ class Lunolet2():
             while (y := float(self.input())) == 0:
                 self.output("Время не может равняться нулю!")
             z = float(self.input())
-            self.__step(x, y, z)
+            self.step(x, y, z)
     def __config(self):
         self.output("Для ввода значения по умолчанию введите d")
         self.output(f"Введите ускорение свододного падения ({self.r_default[4]} по умолчанию)")
