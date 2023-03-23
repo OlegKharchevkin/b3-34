@@ -60,22 +60,23 @@ class Lunolet3():
         self.r[7] = z
         self.r[6] = x
         self.r[1] = y
-        if self.r[8] - self.r[5] < 0: 
+        if self.r[8] - self.r[5] <= 10**(-2): 
             self.r[9] = 0
             self.r[0] = 0
+            self.r[8] = self.r[5] 
         self.r[11] -= self.r[6]
         self.r[6] *= self.r[4] / (self.r[1] * (self.r[3] + self.r[11]))
         while True:
+            #print(self.r)
             r0tmp = self.r[0]
             self.r[0] += (self.r[6] * math.sin(self.r[7]) - (self.r[9] * self.r[0]) / self.r[8]) * self.r[1]
             self.r[10] += ((r0tmp + self.r[0]) * self.r[1] * 90) / (math.pi * self.r[8])
             rbtmp = self.r[9]
-            self.r[9] += (self.r[6] * math.cos(self.r[7]) - (self.r[2] * self.r[5] + self.r[0]**2) / self.r[8]) * self.r[1]
+            self.r[9] += (self.r[6] * math.cos(self.r[7]) + (self.r[0]**2 - self.r[2] * self.r[5]) / self.r[8]) * self.r[1]
             self.r[8] += ((rbtmp + self.r[9]) * self.r[1]) / 2
-            if self.r[8] >= self.r[5]:
+            if self.r[8]>=self.r[5]: 
                 break
             self.r[1] = (self.r[5] - self.r[8]) / self.r[9]
-    
 if __name__ == "__main__":
     l3 = Lunolet3(r = Lunolet3.r_default, config_ = False)
     l3()
