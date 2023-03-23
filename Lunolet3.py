@@ -79,5 +79,5 @@ class Lunolet3():
             self.r[1] = (self.r[5] - self.r[8]) / self.r[9]
             
 if __name__ == "__main__":
-    l3 = Lunolet3(r = Lunolet3.r_default, config_ = False)
+    l3 = Lunolet3()
     l3()
