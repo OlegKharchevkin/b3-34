@@ -12,7 +12,7 @@ class Lunolet2():
                  0,       # 9  высота корабля
                  0,       # 10 вертикальная скорость
                  250000,  # 11 растояние до цели
-                 400]     # 12 запас топлива
+                 1000]    # 12 запас топлива
     def __init__(self, output_ = print, input_ = input, r = ([0]*13), config_ = True):
         self.output = output_
         self.input = input_
@@ -55,22 +55,27 @@ class Lunolet2():
     def step(self, x, y, z):
         self.r[1] = z
         self.r[2] = y
-        self.r[8] = x / self.r[2]
+        self.r[8] = x / self.r[2] 
         self.r[3] = (self.r[8] * self.r[6]) / (self.r[12] + self.r[5])
+        if self.r[9] <= 10**(-2): 
+            self.r[00] = 0
+            self.r[10] = 0
+            self.r[9] = 0 
         while True:
             while True:
                 r0tmp = self.r[0]
-                self.r[0] += math.sin(self.r[1]) * self.r[3] * self.r[2]
-                self.r[11] -= ((r0tmp + self.r[0]) * 2) / 2
+                self.r[0] += math.sin(math.radians(self.r[1])) * self.r[3] * self.r[2]
+                self.r[11] -= ((r0tmp + self.r[0]) * self.r[2]) / 2
                 rbtmp = self.r[10]
-                self.r[10] -= (self.r[4] - self.r[3] * math.cos(self.r[1])) * self.r[2]
-                self.r[9] += ((rbtmp+self.r[10]) * 2) / 2
+                self.r[10] -= (self.r[4] - self.r[3] * math.cos(math.radians(self.r[1]))) * self.r[2]
+                self.r[9] += ((rbtmp+self.r[10]) * self.r[2]) / 2
                 self.r[12] -= self.r[8] * self.r[2]
                 if self.r[12] >=0:
                     break
-                self.r[2] = self.r[12] / self.r[8]
+                self.r[2] = self.r[12] / self.r[8] 
             if self.r[9] < 0:
-                self.r[2] = (2 * self.r[9]) / ((2 * self.r[9] * (self.r[4] - self.r[3] * math.cos(self.r[1])))**0.5 - self.r[10])
+                x = (self.r[4] - self.r[3] * math.cos(math.radians(self.r[1]))) * self.r[9] * 2
+                self.r[2] = (2 * self.r[9]) / ((x + self.r[10]**2)**0.5 - self.r[10])
             elif self.r[9] != 0:
                 if self.r[3] < self.r[7]:
                     if self.r[12] == 0:
@@ -83,11 +88,11 @@ class Lunolet2():
                 else:
                     self.output("Перегрузки!")
                     self.r[2] = self.r[3] - self.r[7]
-                    self.r[8] = self.r[12] / self.r[2]
-                    self.r[3] = (self.r[8] * self.r[6]) / (self.r[12] + self.r[5])
+                    self.r[8] = 0 
+                    self.r[3] = 0
             else:
                 break #ввод/вывод
             
-if __name__ == "__main__":
+if __name__ == "__main__": # 12 запас топлива
     l2 = Lunolet2()
     l2()
