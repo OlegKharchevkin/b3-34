@@ -6,7 +6,7 @@ class Lunolet3():
                  2250,    # 3  масса корабля без топлива
                  3660,    # 4  скорость вылета продукнов сгорания
                  1738000, # 5  радиус Луны
-                 0,       # 6  расход топлива
+                 0,       # 6  ускорение
                  0,       # 7  угол наклона корабля
                  1738000, # 8  радиус орбиты корабля
                  0,       # 9  вертикальная скорость
@@ -58,25 +58,26 @@ class Lunolet3():
         self.r[11] = self.r_default[11] if (i := self.input()) == 'd' else float(i)
     def step(self, x, y, z):
         self.r[7] = z
-        self.r[6] = x
+        self.r[6] = (x * self.r[4]) / ((self.r[3] + self.r[11]) * y)
         self.r[1] = y
         if self.r[8] - self.r[5] <= 10**(-2): 
             self.r[9] = 0
             self.r[0] = 0
-            self.r[8] = self.r[5] 
-        self.r[11] -= self.r[6]
-        self.r[6] *= self.r[4] / (self.r[1] * (self.r[3] + self.r[11]))
+            self.r[8] = self.r[5]
+        self.r[11] -= x
+        ratmp = self.r[8]
         while True:
-            #print(self.r)
             r0tmp = self.r[0]
-            self.r[0] += (self.r[6] * math.sin(self.r[7]) - (self.r[9] * self.r[0]) / self.r[8]) * self.r[1]
-            self.r[10] += ((r0tmp + self.r[0]) * self.r[1] * 90) / (math.pi * self.r[8])
+            self.r[0] += (self.r[6] * math.sin(math.radians(self.r[7])) - (self.r[9] * self.r[0]) / ratmp) * self.r[1]
+            self.r[10] += ((r0tmp + self.r[0]) * self.r[1] * 90) / (math.pi * ratmp)
             rbtmp = self.r[9]
-            self.r[9] += (self.r[6] * math.cos(self.r[7]) + (self.r[0]**2 - self.r[2] * self.r[5]) / self.r[8]) * self.r[1]
+            y = self.r[6] * math.cos(math.radians(self.r[7])) - (self.r[5] / ratmp)**2 * self.r[2]
+            self.r[9] += ((self.r[0]**2 / ratmp) + y)* self.r[1]
             self.r[8] += ((rbtmp + self.r[9]) * self.r[1]) / 2
             if self.r[8]>=self.r[5]: 
                 break
             self.r[1] = (self.r[5] - self.r[8]) / self.r[9]
+            
 if __name__ == "__main__":
     l3 = Lunolet3(r = Lunolet3.r_default, config_ = False)
     l3()
