@@ -47,7 +47,7 @@ class Lunolet3():
         self.output(f"Введите радиус Луны  ({self.r_default[5]} по умолчанию)")
         self.r[5] = self.r_default[5] if (i := self.input()) == 'd' else float(i)
         self.output(f"Введите начальную высоту ({self.r_default[8] - self.r[5]} по умолчанию)")
-        self.r[8] = (self.r_default[8] if (i := self.input()) == 'd' else float(i)) + self.r[5]
+        self.r[8] = (self.r_default[8] if (i := self.input()) == 'd' else float(i) + self.r[5])
         self.output(f"Введите начальную верт. скорость ({self.r_default[9]} по умолчанию)")
         self.r[9] = self.r_default[9] if (i := self.input()) == 'd' else float(i)
         self.output(f"Введите угловую координату ({self.r_default[10]} по умолчанию)")
